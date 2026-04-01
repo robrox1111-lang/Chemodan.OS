@@ -1,0 +1,57 @@
+while true do
+    term.setBackgroundColor(colors.black)
+    term.setTextColor(colors.white)
+    term.clear()
+    term.setCursorPos(1,1)
+
+    print("Games")
+    print("----------------------")
+    print("1 - Snake")
+    print("2 - Guess number")
+    print("3 - Exit")
+    print("")
+    write("> ")
+
+    local c = read()
+
+    if c == "1" then
+        shell.run("apps/snake.lua")
+    elseif c == "2" then
+        term.clear()
+        term.setCursorPos(1,1)
+
+        local secret = math.random(1, 100)
+        print("I guessed a number from 1 to 100")
+        print("Try to find it")
+        print("Type exit to leave")
+        print("")
+
+        while true do
+            write("Your guess: ")
+            local v = read()
+
+            if v == "exit" then
+                break
+            end
+
+            local n = tonumber(v)
+            if n then
+                if n < secret then
+                    print("Too small")
+                elseif n > secret then
+                    print("Too big")
+                else
+                    print("You win!")
+                    print("Press any key...")
+                    os.pullEvent("key")
+                    break
+                end
+            else
+                print("Not a number")
+            end
+        end
+
+    elseif c == "3" then
+        break
+    end
+end
